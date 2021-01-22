@@ -12,7 +12,7 @@ interface ChuckNorrisApiJokeDTO {
 
 export default class ChuckNorrisJokesProvider implements JokesProvider {
 
-  public async throwRandomJoke(): Promise<JokeResponse> {
+  public async shuffleCategory(): Promise<JokeResponse> {
     const resp = await fetch(`${API_BASE_URL}/jokes/random`);
     const { id, value, url, icon_url } = <ChuckNorrisApiJokeDTO>(await resp.json());
     return {

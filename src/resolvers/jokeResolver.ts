@@ -5,8 +5,8 @@ export default class JokeResolver {
 
   constructor(private jokesProvider: JokesProvider) { }
 
-  public getRandomJoke = async (): Promise<JokeResponse> => {
+  public getRandomJoke = (): Promise<JokeResponse> => {
     console.assert(this.jokesProvider);
-    return await this.jokesProvider.throwRandomJoke();
+    return this.jokesProvider.shuffleCategory();
   }
 }
