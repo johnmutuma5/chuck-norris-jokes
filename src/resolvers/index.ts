@@ -13,6 +13,9 @@ export default {
     random_joke: function randomJokes(_: any, args: RandomJokeInput): Promise<JokeResponse>{
        return jokeResolver.getRandomJoke(args.category)
     },
+    categories: function getJokeCategories() {
+      return jokeResolver.getJokeCategories();
+    },
     health_check: (): string => healthcheckResolver.healthCheck()
   }
 };
