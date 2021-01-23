@@ -1,5 +1,5 @@
-import Joke from "../types/joke";
+import JokeResponse from "../types/jokeResponse";
 
 export default interface JokesProvider {
-  throwRandomJoke: () => Promise<Joke>;
+  shuffleCategory: (categoryName: string) => Promise<JokeResponse>;
 }

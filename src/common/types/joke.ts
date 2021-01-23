@@ -1,3 +1,6 @@
 export default interface Joke {
-  value: string;
+  id: string;
+  text: string;
+  joke_url: string;
+  icon_url: string;
 }

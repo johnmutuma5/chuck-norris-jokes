@@ -1,5 +1,5 @@
 export default class HealthcheckResolver {
-  healthCheck = async () => {
+  healthCheck = (): string => {
     return 'Success!!!';
   }
 }
