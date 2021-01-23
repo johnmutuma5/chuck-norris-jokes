@@ -9,4 +9,8 @@ export default class JokeResolver {
     console.assert(this.jokesProvider);
     return this.jokesProvider.shuffleCategory(categoryName);
   }
+
+  public getJokeCategories = () => {
+    return this.jokesProvider.getJokeCategories();
+  }
 }

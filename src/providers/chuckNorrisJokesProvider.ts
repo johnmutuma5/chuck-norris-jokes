@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import CategoriesResponse from 'src/common/types/categoriesResponse';
 import JokeResponse from 'src/common/types/jokeResponse';
 import JokesProvider from '../common/interfaces/jokesProvider';
 
@@ -23,6 +24,15 @@ export default class ChuckNorrisJokesProvider implements JokesProvider {
         joke_url: url,
         icon_url
       }
+    };
+  }
+
+  public async getJokeCategories(): Promise<CategoriesResponse> {
+    const resp = await fetch(`${API_BASE_URL}/jokes/categories`);
+    const categories = <string[]>(await resp.json());
+    return {
+      status: resp.status,
+      value: categories
     };
   }
 }
