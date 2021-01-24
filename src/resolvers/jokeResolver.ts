@@ -1,5 +1,5 @@
 import JokesProvider from "src/common/interfaces/jokesProvider";
-import {JokeResponse} from "src/common/types/responses";
+import {JokeCategoriesResponse, JokeResponse} from "src/common/types/responses";
 
 export default class JokeResolver {
 
@@ -10,7 +10,7 @@ export default class JokeResolver {
     return this.jokesProvider.shuffleCategory(categoryName);
   }
 
-  public getJokeCategories = () => {
+  public getJokeCategories = (): Promise<JokeCategoriesResponse> => {
     return this.jokesProvider.getJokeCategories();
   }
 }
