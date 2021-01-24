@@ -11,12 +11,10 @@ const healthcheckResolver = new HealthcheckResolver();
 
 export default {
   Query: {
-    random_joke: function randomJokes(_: any, args: RandomJokeInput): Promise<JokeResponse>{
-       return jokeResolver.getRandomJoke(args.category)
-    },
-    categories: function getJokeCategories(): Promise<CategoriesResponse> {
-      return jokeResolver.getJokeCategories();
-    },
+    random_joke: (_: any, args: RandomJokeInput): Promise<JokeResponse> => (
+      jokeResolver.getRandomJoke(args.category)
+    ),
+    categories: (): Promise<CategoriesResponse> => (jokeResolver.getJokeCategories()),
     health_check: (): string => healthcheckResolver.healthCheck()
   }
 };
