@@ -1,7 +1,7 @@
-import CategoriesResponse from "../types/categoriesResponse";
-import JokeResponse from "../types/jokeResponse";
+import Joke from "../types/joke";
+import OurResponse from "../types/response";
 
 export default interface JokesProvider {
-  shuffleCategory: (categoryName: string) => Promise<JokeResponse>;
-  getJokeCategories: () => Promise<CategoriesResponse>;
+  shuffleCategory: (categoryName: string) => Promise<OurResponse<Joke>>;
+  getJokeCategories: () => Promise<OurResponse<string[]>>;
 }
