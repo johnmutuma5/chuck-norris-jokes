@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
-import CategoriesResponse from 'src/common/types/categoriesResponse';
-import JokeResponse from 'src/common/types/jokeResponse';
+import Joke from 'src/common/types/joke';
+import OurResponse from 'src/common/types/response';
 import JokesProvider from '../common/interfaces/jokesProvider';
 
 const API_BASE_URL = 'https://api.chucknorris.io';
@@ -13,7 +13,7 @@ interface ChuckNorrisApiJokeDTO {
 
 export default class ChuckNorrisJokesProvider implements JokesProvider {
 
-  public async shuffleCategory(categoryName: string): Promise<JokeResponse> {
+  public async shuffleCategory(categoryName: string): Promise<OurResponse<Joke>> {
     const resp = await fetch(`${API_BASE_URL}/jokes/random?category=${categoryName}`);
     const { id, value, url, icon_url } = <ChuckNorrisApiJokeDTO>(await resp.json());
     return {
@@ -27,7 +27,7 @@ export default class ChuckNorrisJokesProvider implements JokesProvider {
     };
   }
 
-  public async getJokeCategories(): Promise<CategoriesResponse> {
+  public async getJokeCategories(): Promise<OurResponse<string[]>> {
     const resp = await fetch(`${API_BASE_URL}/jokes/categories`);
     const categories = <string[]>(await resp.json());
     return {

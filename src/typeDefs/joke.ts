@@ -8,7 +8,7 @@ export default gql`
 
   type JokeResponse {
     status: Int
-    value: Joke
+    value: Joke 
   }
 
   type CategoriesResponse {
