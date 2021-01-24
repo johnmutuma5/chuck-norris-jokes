@@ -3,6 +3,7 @@ import JokeResolver from './jokeResolver';
 import ChuckNorrisJokesProvider from "../providers/chuckNorrisJokesProvider";
 import JokeResponse from "src/common/types/jokeResponse";
 import {RandomJokeInput} from "src/common/types/randomJokeInpt";
+import CategoriesResponse from "src/common/types/categoriesResponse";
 
 const jokeResolver = new JokeResolver(new ChuckNorrisJokesProvider);
 const healthcheckResolver = new HealthcheckResolver();
@@ -13,7 +14,7 @@ export default {
     random_joke: function randomJokes(_: any, args: RandomJokeInput): Promise<JokeResponse>{
        return jokeResolver.getRandomJoke(args.category)
     },
-    categories: function getJokeCategories() {
+    categories: function getJokeCategories(): Promise<CategoriesResponse> {
       return jokeResolver.getJokeCategories();
     },
     health_check: (): string => healthcheckResolver.healthCheck()
