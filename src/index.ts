@@ -11,6 +11,7 @@ const server = new ApolloServer({
   resolvers
 });
 
+
 server.applyMiddleware({ app, cors: true });
 
 app.listen({ port: 4000 }, () => {
