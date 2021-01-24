@@ -7,12 +7,12 @@ export default gql`
   }
 
   type JokeResponse {
-    status: Number
+    status: Int
     value: Joke
   }
 
   type CategoriesResponse {
-    status : Number
+    status : Int
     value:  [String!]
   }
 
