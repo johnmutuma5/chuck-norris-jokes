@@ -11,6 +11,7 @@ export default class JokeResolver {
   }
 
   public getJokeCategories = (): Promise<JokeCategoriesResponse> => {
+    console.assert(this.jokesProvider);
     return this.jokesProvider.getJokeCategories();
   }
 }
