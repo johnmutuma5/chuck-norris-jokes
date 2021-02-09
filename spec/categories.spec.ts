@@ -4,6 +4,7 @@ import resolvers from '../src/resolvers';
 import typeDefs from '../src/typeDefs';
 import { createTestClient } from 'apollo-server-testing';
 import {JokeCategoriesResponse} from '../src/common/types/responses';
+import ChuckNorrisJokesProvider from '../src/providers/chuckNorrisJokesProvider';
 
 const GET_CATEGORIES = gql`
   query {
@@ -16,7 +17,13 @@ const GET_CATEGORIES = gql`
 
 describe('Joke Categories', () => {
   it('should return an array of strings', async () => {
-    const server = new ApolloServer({ typeDefs, resolvers });
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      dataSources: () => ({
+        jokesProvider: new ChuckNorrisJokesProvider()
+      })
+    });
 
     const statusCode = 200;
     const mockCategories = ['career', 'fashion'];
