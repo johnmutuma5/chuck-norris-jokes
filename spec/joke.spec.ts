@@ -5,6 +5,7 @@ import resolvers from '../src/resolvers';
 import typeDefs from '../src/typeDefs';
 import {createTestClient} from "apollo-server-testing";
 import {JokeResponse} from "../src/common/types/responses";
+import ChuckNorrisJokesProvider from "../src/providers/chuckNorrisJokesProvider";
 
 const GET_RANDOM_JOKE = gql`
   query Joke($category: String!) {
@@ -24,7 +25,10 @@ describe('Jokes', () => {
   it('should resolve random jokes', async () => {
     const server = new ApolloServer({
       typeDefs,
-      resolvers
+      resolvers,
+      dataSources: () => ({
+        jokesProvider: new ChuckNorrisJokesProvider()
+      })
     });
 
     const statusCode = 200;

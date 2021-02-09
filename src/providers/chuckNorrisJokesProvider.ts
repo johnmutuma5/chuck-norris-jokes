@@ -1,8 +1,7 @@
-import fetch from 'node-fetch';
 import  {JokeCategoriesResponse, JokeResponse} from 'src/common/types/responses';
-import JokesProvider from '../common/interfaces/jokesProvider';
+import { RESTDataSource } from 'apollo-datasource-rest';
 
-const API_BASE_URL = 'https://api.chucknorris.io';
+
 interface ChuckNorrisApiJokeDTO {
   id: string;
   value: string;
@@ -14,13 +13,18 @@ interface ChuckNorrisJokeCategoriesDTO {
   [index: string]: string;
 }
 
-export default class ChuckNorrisJokesProvider implements JokesProvider {
+export default class ChuckNorrisJokesProvider extends RESTDataSource {
+
+  constructor() {
+    super();
+    this.baseURL = "https://api.chucknorris.io/jokes";
+  }
 
   public async shuffleCategory(categoryName: string): Promise<JokeResponse> {
-    const resp = await fetch(`${API_BASE_URL}/jokes/random?category=${categoryName}`);
-    const { id, value, url, icon_url } = <ChuckNorrisApiJokeDTO>(await resp.json());
+    const resp = await this.get(`random`, { category: categoryName });
+    const { id, value, url, icon_url } = <ChuckNorrisApiJokeDTO>(resp);
     return {
-      status: resp.status,
+      status: 200,
       value: {
         id,
         text: value,
@@ -31,10 +35,10 @@ export default class ChuckNorrisJokesProvider implements JokesProvider {
   }
 
   public async getJokeCategories(): Promise<JokeCategoriesResponse> {
-    const resp = await fetch(`${API_BASE_URL}/jokes/categories`);
-    const categories = <ChuckNorrisJokeCategoriesDTO>(await resp.json());
+    const resp = await this.get(`categories`);
+    const categories = <ChuckNorrisJokeCategoriesDTO>(resp);
     return {
-      status: resp.status,
+      status: 200,
       value: categories
     };
   }
